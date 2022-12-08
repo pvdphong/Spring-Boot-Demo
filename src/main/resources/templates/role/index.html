@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/default">
+<head>
+<meta charset="UTF-8">
+<title>Danh sách quyền</title>
+</head>
+
+<body>
+	<!-- CONTENT -->
+	<section id="admin-content" class="p-3" layout:fragment="content">
+		<h3 class="mb-3">Danh sách quyền</h3>
+		<div class="row">
+			<div class="col-md-8">
+				<a th:href="@{/role/add}" class="btn btn-primary">Thêm mới</a>
+			</div>
+			<div class="col-md-4">
+				<div class="input-group">
+					<input type="text" class="form-control" placeholder="Tìm kiếm...">
+					<div class="input-group-append">
+						<span class="input-group-text" id="basic-addon2"><i
+							class="fa fa-search"></i></span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<table class="table table-bordered table-hover mt-3">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Tên Quyền</th>
+					<th>Mô Tả</th>
+					<th>Hành động</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:if="${roles.empty}">
+					<td colspan="4" class="text-center">Chưa có dữ liệu!</td>
+				</tr>
+				<tr th:each="item : ${roles}">
+					<td th:text="${item.id}"></td>
+					<td th:text="${item.name}"></td>
+					<td th:text="${item.desc}"></td>
+					<td><a th:href="@{/role/edit(id=${item.id})}"
+						class="btn btn-sm btn-info"> <i class="fa fa-pencil-square-o"></i>
+					</a> <a th:href="@{/role/delete(id=${item.id})}"
+						class="btn btn-sm btn-danger"> <i class="fa fa-trash-o"></i>
+					</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</section>
+</body>
+
+</html>
